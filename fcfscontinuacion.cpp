@@ -362,7 +362,6 @@ int inicio(){
         if(proceso[j].error == true){
             cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"Error"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Terminado"<<"\t"<<"--"<<"\t"<<proceso[j].TLLE<<"\t"<<proceso[j].TFIN<<"\t"<<proceso[j].TT<<"\t"<<proceso[j].TESP<<"\t"<<proceso[j].TRET<<"\t"<<proceso[j].TRES<<endl;
         }else{
-            //cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<proceso[j].Res<<"\t"<<proceso[j].operacion<<"\t   "<<proceso[j].TT<<"\t"<<"Terminado"<<"\t"<<proceso[j].TLLE<<"\t"<<proceso[j].TFIN<<"\t"<<proceso[j].TT<<"\t"<<proceso[j].TESP<<"\t"<<proceso[j].TRET<<"\t"<<proceso[j].TRES<<endl;
             cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<proceso[j].Res<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Terminado   "<<"\t"<<"--"<<"\t"<<proceso[j].TLLE<<"\t"<<proceso[j].TFIN<<"\t"<<proceso[j].TT<<"\t"<<proceso[j].TESP<<"\t"<<proceso[j].TRET<<"\t"<<proceso[j].TRES<<endl;
         }
     }
