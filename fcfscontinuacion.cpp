@@ -16,6 +16,7 @@ struct Procesos{
     bool error = false, respuesta = false, tabla = false, bloqueado = false, listo = false, terminado = false;
 };
 
+
 int inicio(){
     srand(time(NULL));
     int auxentrada = 0, primero = 0, nprocesos = 0, idglobal = 1, clock = 0, finalizados = 0, pos = 0, s, limite = 4, contaux = 0;
