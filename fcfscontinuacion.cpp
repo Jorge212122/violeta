@@ -16,7 +16,6 @@ struct Procesos{
     bool error = false, respuesta = false, tabla = false, bloqueado = false, listo = false, terminado = false;
 };
 
-
 int inicio(){
     srand(time(NULL));
     int auxentrada = 0, primero = 0, nprocesos = 0, idglobal = 1, clock = 0, finalizados = 0, pos = 0, s, limite = 4, contaux = 0;
@@ -206,6 +205,26 @@ int inicio(){
                     proceso[pronuevos].TT = 0;
                     proceso[pronuevos].id = idglobal;
                     almacen.push(pronuevos);
+                    if(proceso[pronuevos].ope == 1){
+                        proceso[pronuevos].Res = (proceso[pronuevos].num1 + proceso[pronuevos].num2);
+                        proceso[pronuevos].operacion = to_string(proceso[pronuevos].num1) + " + " + to_string(proceso[pronuevos].num2);
+                    }
+                    else if(proceso[pronuevos].ope == 2){
+                        proceso[pronuevos].Res = (proceso[pronuevos].num1 - proceso[pronuevos].num2);
+                        proceso[pronuevos].operacion = to_string(proceso[pronuevos].num1) + " - " + to_string(proceso[pronuevos].num2);
+                    }
+                    else if(proceso[pronuevos].ope == 3){
+                        proceso[pronuevos].Res = (proceso[pronuevos].num1 * proceso[pronuevos].num2);
+                        proceso[pronuevos].operacion = to_string(proceso[pronuevos].num1) + " * " + to_string(proceso[pronuevos].num2);
+                    }
+                    else if(proceso[pronuevos].ope == 4){
+                        proceso[pronuevos].Res = (proceso[pronuevos].num1 / proceso[pronuevos].num2);
+                        proceso[pronuevos].operacion = to_string(proceso[pronuevos].num1) + " / " + to_string(proceso[pronuevos].num2);
+                    }
+                    else if(proceso[pronuevos].ope == 5){
+                        proceso[pronuevos].Res = (proceso[pronuevos].num1 % proceso[pronuevos].num2);
+                        proceso[pronuevos].operacion = to_string(proceso[pronuevos].num1) + " % " + to_string(proceso[pronuevos].num2);
+                    }
                     idglobal++;
                     nprocesos++;
 
@@ -240,7 +259,7 @@ int inicio(){
                             cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"--"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Ejecutandose"<<"\t"<<"--"<<"\t"<<proceso[j].TLLE<<"\t"<<"--"<<"\t"<<proceso[j].TT<<"\t"<<(clock-(proceso[j].TLLE - proceso[j].TT))<<"\t"<<"--"<<"\t"<<proceso[j].TRES<<endl;
                         }
                         else if(proceso[j].bloqueado == true){
-                            cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"--"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Bloqueado   "<<"\t"<<(8-proceso[j].TTB)<<"\t"<<proceso[j].TLLE<<"\t"<<"--"<<"\t"<<proceso[j].TT<<"\t"<<proceso[j].TESP<<"\t"<<"--"<<"\t"<<proceso[j].TRES<<endl;
+                            cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"--"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Bloqueado   "<<"\t"<<(8-proceso[j].TTB)-1<<"\t"<<proceso[j].TLLE<<"\t"<<"--"<<"\t"<<proceso[j].TT<<"\t"<<proceso[j].TESP<<"\t"<<"--"<<"\t"<<proceso[j].TRES<<endl;
                         }
                         else if(proceso[j].listo == true){
                             cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"--"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Listo       "<<"\t"<<"--"<<"\t"<<proceso[j].TLLE<<"\t"<<"--"<<"\t"<<proceso[j].TT<<"\t"<<proceso[j].TESP<<"\t"<<"--"<<"\t"<<"--"<<endl;
