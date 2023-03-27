@@ -11,14 +11,14 @@
 using namespace std;
 
 struct Procesos{
-    int id = 0, ope = 0, num1 = 0, num2 = 0, tme = 0, TT = 0, TTB = 0, estado = 0, TLLE = 0, TFIN = 0, TSER = 0, TESP = 0, TRET = 0, TRES = 0, Res = 0;
+    int id = 0, ope = 0, num1 = 0, num2 = 0, tme = 0, TT = 0, TTB = 0, estado = 0, TLLE = 0, TFIN = 0, TSER = 0, TESP = 0, TRET = 0, TRES = 0, Res = 0, quantum = 0;
     string operacion = "";
     bool error = false, respuesta = false, tabla = false, bloqueado = false, listo = false, terminado = false;
 };
 
 int inicio(){
     srand(time(NULL));
-    int auxentrada = 0, primero = 0, nprocesos = 0, idglobal = 1, clock = 0, finalizados = 0, pos = 0, s, limite = 4, contaux = 0;
+    int auxentrada = 0, primero = 0, nprocesos = 0, idglobal = 1, clock = 0, finalizados = 0, pos = 0, s, limite = 4, contaux = 0, vquantum = 0;
     char entrada;
     bool pausa = false, vacio = false;
     queue<int>almacen;
@@ -26,9 +26,11 @@ int inicio(){
     queue<int>colabloq;
     srand(time(NULL));
 
-    cout<<"\n-----FCFS-----"<<endl;
-    cout << "Ingrese el numero de procesos: ";
+    cout<<"\n-----Round-Robin-----"<<endl;
+    cout << "Ingrese el numero de procesos: "<<endl;
     cin >> nprocesos;
+    cout << "Ingrese el valor de Quantum: ";
+    cin >> vquantum;
     system("cls");
 
     cout << endl;
@@ -41,6 +43,7 @@ int inicio(){
         proceso[i].tme = 5+rand()%(16-5);
         proceso[i].TT = 0;
         proceso[i].id = idglobal;
+        proceso[i].quantum = vquantum;
         almacen.push(i);
         if(proceso[i].ope == 1){
             proceso[i].Res = (proceso[i].num1 + proceso[i].num2);
@@ -104,6 +107,7 @@ int inicio(){
             }else{
                 cout<<"NUEVOS: "<< nuevos <<endl;
             }
+            cout<< "VALOR DE QUANTUM: "<< endl;
             cout<<"LISTOS:"<<"\nID:\tTME\tTT"<<endl; //aqui inicia el proceso de listos
             if(cola.size()< 3 && cola.size()>0 && almacen.size()>0 && vacio == false){
                 int auxalma = almacen.front();
@@ -204,6 +208,7 @@ int inicio(){
                     proceso[pronuevos].tme = 5+rand()%(16-5);
                     proceso[pronuevos].TT = 0;
                     proceso[pronuevos].id = idglobal;
+                    proceso[pronuevos].quantum = vquantum;
                     almacen.push(pronuevos);
                     if(proceso[pronuevos].ope == 1){
                         proceso[pronuevos].Res = (proceso[pronuevos].num1 + proceso[pronuevos].num2);
