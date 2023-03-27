@@ -13,7 +13,7 @@ using namespace std;
 struct Procesos{
     int id = 0, ope = 0, num1 = 0, num2 = 0, tme = 0, TT = 0, TTB = 0, estado = 0, TLLE = 0, TFIN = 0, TSER = 0, TESP = 0, TRET = 0, TRES = 0, Res = 0, quantum = 0;
     string operacion = "";
-    bool error = false, respuesta = false, tabla = false, bloqueado = false, listo = false, terminado = false;
+    bool error = false, respuesta = false, tabla = false, bloqueado = false, listo = false, terminado = false, validaQuant = false;
 };
 
 int inicio(){
@@ -27,9 +27,9 @@ int inicio(){
     srand(time(NULL));
 
     cout<<"\n-----Round-Robin-----"<<endl;
-    cout << "Ingrese el numero de procesos: "<<endl;
+    cout << "Ingrese el numero de procesos: ";
     cin >> nprocesos;
-    cout << "Ingrese el valor de Quantum: ";
+    cout << "\nIngrese el valor de Quantum: ";
     cin >> vquantum;
     system("cls");
 
@@ -118,9 +118,14 @@ int inicio(){
                 auxPos = cola.front();
                 cola.pop();
                 cola.push(auxPos);
+                if(proceso[auxPos].validaQuant == true){
+                    proceso[auxPos].quantum = vquantum;
+                }else{
+                    proceso[auxPos].validaQuant = false;
+                }
                 proceso[auxPos].bloqueado = false;
                 proceso[auxPos].listo = true;
-                cout << proceso[auxPos].id << "\t" << proceso[auxPos].tme <<"\t"<< proceso[auxPos].TT << endl;
+                cout << proceso[auxPos].id << "\t" << proceso[auxPos].tme <<"\t"<< proceso[auxPos].TT << "\t" << proceso[auxPos].quantum << endl;
             };
 
             cout<<"\nBLOQUEADOS: \nID:\tTTB:"<<endl;
@@ -149,6 +154,15 @@ int inicio(){
                 cout<<"TME:\t\t"<<proceso[ejecucion].tme<<endl;
                 cout<<"TT:\t\t" << s <<endl;
                 cout<<"TR:\t\t" << proceso[ejecucion].tme - s <<endl;
+                cout<<"Quantum:\t"<<proceso[ejecucion].quantum <<endl;
+                if((proceso[ejecucion].quantum) == 1){
+                    proceso[ejecucion].validaQuant = true;
+                    int posquant = cola.front();
+                    cola.pop();
+                    cola.push(posquant);
+                }else{
+                    proceso[ejecucion].quantum--;
+                }
             }else{
                 cout<<"\nTodos los procesos bloqueados"<<endl;
             }
