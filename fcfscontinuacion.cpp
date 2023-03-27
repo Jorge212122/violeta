@@ -256,13 +256,13 @@ int inicio(){
                             cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"Error"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Terminado"<<"\t"<<"--"<<"\t"<<proceso[j].TLLE<<"\t"<<proceso[j].TFIN<<"\t"<<proceso[j].TT<<"\t"<<proceso[j].TESP<<"\t"<<proceso[j].TRET<<"\t"<<proceso[j].TRES<<endl;
                         }
                         else if(proceso[j].tabla == true){
-                            cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"--"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Ejecutandose"<<"\t"<<"--"<<"\t"<<proceso[j].TLLE<<"\t"<<"--"<<"\t"<<proceso[j].TT<<"\t"<<(clock-(proceso[j].TLLE - proceso[j].TT))<<"\t"<<"--"<<"\t"<<proceso[j].TRES<<endl;
+                            cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"--"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Ejecutandose"<<"\t"<<"--"<<"\t"<<proceso[j].TLLE<<"\t"<<"--"<<"\t"<<proceso[j].TT<<"\t"<<clock-proceso[j].TLLE - proceso[j].TT<<"\t"<<"--"<<"\t"<<proceso[j].TRES<<endl;
                         }
                         else if(proceso[j].bloqueado == true){
-                            cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"--"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Bloqueado   "<<"\t"<<(8-proceso[j].TTB)-1<<"\t"<<proceso[j].TLLE<<"\t"<<"--"<<"\t"<<proceso[j].TT<<"\t"<<proceso[j].TESP<<"\t"<<"--"<<"\t"<<proceso[j].TRES<<endl;
+                            cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"--"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Bloqueado   "<<"\t"<<(8-proceso[j].TTB)-1<<"\t"<<proceso[j].TLLE<<"\t"<<"--"<<"\t"<<proceso[j].TT<<"\t"<<clock-proceso[j].TLLE - proceso[j].TT<<"\t"<<"--"<<"\t"<<proceso[j].TRES<<endl;
                         }
                         else if(proceso[j].listo == true){
-                            cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"--"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Listo       "<<"\t"<<"--"<<"\t"<<proceso[j].TLLE<<"\t"<<"--"<<"\t"<<proceso[j].TT<<"\t"<<proceso[j].TESP<<"\t"<<"--"<<"\t"<<"--"<<endl;
+                            cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<"--"<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Listo       "<<"\t"<<"--"<<"\t"<<proceso[j].TLLE<<"\t"<<"--"<<"\t"<<proceso[j].TT<<"\t"<<clock-proceso[j].TLLE - proceso[j].TT<<"\t"<<"--"<<"\t"<<"--"<<endl;
                         }
                         else if(proceso[j].terminado == true && proceso[j].error == false){
                             cout<<proceso[j].id<<"\t"<<proceso[j].tme<<"\t"<<proceso[j].Res<<"\t"<<proceso[j].operacion<<"\t"<<proceso[j].num1<<"\t"<<proceso[j].num2<<"\t   "<<proceso[j].TT<<"\t"<<"Terminado   "<<"\t"<<"--"<<"\t"<<proceso[j].TLLE<<"\t"<<proceso[j].TFIN<<"\t"<<proceso[j].TT<<"\t"<<proceso[j].TESP<<"\t"<<proceso[j].TRET<<"\t"<<proceso[j].TRES<<endl;
@@ -330,6 +330,7 @@ int inicio(){
             finalizados++;
             mem--;
         }
+        proceso[actual].listo = false;
         proceso[actual].terminado = true;
         proceso[actual].tabla = false;
         auxentrada = 0;
@@ -373,4 +374,3 @@ int main() {
     return 0;
 }
 
-//(s-(proceso[j].TLLE - proceso[j].TT))
