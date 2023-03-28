@@ -13,7 +13,7 @@ using namespace std;
 struct Procesos{
     int id = 0, ope = 0, num1 = 0, num2 = 0, tme = 0, TT = 0, TTB = 0, estado = 0, TLLE = 0, TFIN = 0, TSER = 0, TESP = 0, TRET = 0, TRES = 0, Res = 0, quantum = 0;
     string operacion = "";
-    bool error = false, respuesta = false, tabla = false, bloqueado = false, listo = false, terminado = false, validaQuant = false;
+    bool error = false, respuesta = false, tabla = false, bloqueado = false, listo = false, terminado = false;
 };
 
 int inicio(){
@@ -27,9 +27,9 @@ int inicio(){
     srand(time(NULL));
 
     cout<<"\n-----Round-Robin-----"<<endl;
-    cout << "Ingrese el numero de procesos: ";
+    cout << "Ingrese el numero de procesos: "<<endl;
     cin >> nprocesos;
-    cout << "\nIngrese el valor de Quantum: ";
+    cout << "Ingrese el valor de Quantum: ";
     cin >> vquantum;
     system("cls");
 
@@ -43,7 +43,6 @@ int inicio(){
         proceso[i].tme = 5+rand()%(16-5);
         proceso[i].TT = 0;
         proceso[i].id = idglobal;
-        proceso[i].quantum = vquantum;
         almacen.push(i);
         if(proceso[i].ope == 1){
             proceso[i].Res = (proceso[i].num1 + proceso[i].num2);
@@ -101,13 +100,13 @@ int inicio(){
         }
 
         for(s = timeT; s < timeME; s++){ //contador de segundos
+            for(int k=vquantum; k > 0; --k)
             nuevos = (nprocesos - finalizados) - auxnuevos;
             if(nuevos <= 0){
                 cout<<"NUEVOS: 0"<<endl;
             }else{
                 cout<<"NUEVOS: "<< nuevos <<endl;
             }
-            cout<< "VALOR DE QUANTUM: "<< endl;
             cout<<"LISTOS:"<<"\nID:\tTME\tTT"<<endl; //aqui inicia el proceso de listos
             if(cola.size()< 3 && cola.size()>0 && almacen.size()>0 && vacio == false){
                 int auxalma = almacen.front();
@@ -118,14 +117,9 @@ int inicio(){
                 auxPos = cola.front();
                 cola.pop();
                 cola.push(auxPos);
-                if(proceso[auxPos].validaQuant == true){
-                    proceso[auxPos].quantum = vquantum;
-                }else{
-                    proceso[auxPos].validaQuant = false;
-                }
                 proceso[auxPos].bloqueado = false;
                 proceso[auxPos].listo = true;
-                cout << proceso[auxPos].id << "\t" << proceso[auxPos].tme <<"\t"<< proceso[auxPos].TT << "\t" << proceso[auxPos].quantum << endl;
+                cout << proceso[auxPos].id << "\t" << proceso[auxPos].tme <<"\t"<< proceso[auxPos].TT << endl;
             };
 
             cout<<"\nBLOQUEADOS: \nID:\tTTB:"<<endl;
@@ -154,15 +148,6 @@ int inicio(){
                 cout<<"TME:\t\t"<<proceso[ejecucion].tme<<endl;
                 cout<<"TT:\t\t" << s <<endl;
                 cout<<"TR:\t\t" << proceso[ejecucion].tme - s <<endl;
-                cout<<"Quantum:\t"<<proceso[ejecucion].quantum <<endl;
-                if((proceso[ejecucion].quantum) == 1){
-                    proceso[ejecucion].validaQuant = true;
-                    int posquant = cola.front();
-                    cola.pop();
-                    cola.push(posquant);
-                }else{
-                    proceso[ejecucion].quantum--;
-                }
             }else{
                 cout<<"\nTodos los procesos bloqueados"<<endl;
             }
@@ -222,7 +207,6 @@ int inicio(){
                     proceso[pronuevos].tme = 5+rand()%(16-5);
                     proceso[pronuevos].TT = 0;
                     proceso[pronuevos].id = idglobal;
-                    proceso[pronuevos].quantum = vquantum;
                     almacen.push(pronuevos);
                     if(proceso[pronuevos].ope == 1){
                         proceso[pronuevos].Res = (proceso[pronuevos].num1 + proceso[pronuevos].num2);
